@@ -61,6 +61,41 @@ class GreetingServiceTest: Common() {
     }
 
     @Test
+    fun `simple message for elder male`() {
+        `when`(clientRepository.findByBirthdayEndsWith(anyString()))
+            .thenReturn(listOf(Client("mail", "first", "last", "male", "1973/4/7")))
+        `when`(messageServiceFactory.getMessageService(safeEq(GreetingTypEnum.SIMPLE.type)))
+            .thenReturn(simpleMessageService)
+        `when`(simpleMessageService.greetingBirthday(anyList<ClientDTO>()))
+            .thenReturn(listOf(GreetingDTO("Subject: Happy birthday!\n",
+                "Happy birthday, dear first!\n", "filePath")))
+
+        val greetings = greetingService.greetingBirthday(GreetingTypEnum.SIMPLE.type)
+
+        assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
+        assertEquals("Happy birthday, dear first!\n", greetings[0].content)
+        assert(greetings[0].filePath != null)
+    }
+
+    @Test
+    fun `simple message for elder female`() {
+        `when`(clientRepository.findByBirthdayEndsWith(anyString()))
+            .thenReturn(listOf(Client("mail", "first", "last", "male", "1972/4/7")))
+        `when`(messageServiceFactory.getMessageService(safeEq(GreetingTypEnum.SIMPLE.type)))
+            .thenReturn(simpleMessageService)
+        `when`(simpleMessageService.greetingBirthday(anyList<ClientDTO>()))
+            .thenReturn(listOf(GreetingDTO("Subject: Happy birthday!\n",
+                "Happy birthday, dear first!\n", "filePath")))
+
+        val greetings = greetingService.greetingBirthday(GreetingTypEnum.SIMPLE.type)
+
+        assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
+        assertEquals("Happy birthday, dear first!\n", greetings[0].content)
+        assert(greetings[0].filePath != null)
+
+    }
+
+    @Test
     fun `tailer message for male`() {
         `when`(clientRepository.findByBirthdayEndsWith(anyString()))
             .thenReturn(listOf(Client("mail", "first", "last", "male", "1988/4/7")))
