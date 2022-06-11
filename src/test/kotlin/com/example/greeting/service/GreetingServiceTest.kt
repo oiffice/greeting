@@ -16,7 +16,7 @@ import org.springframework.test.context.ContextConfiguration
 
 @SpringBootTest
 @ContextConfiguration(classes = [GreetingService::class, MessageServiceFactory::class])
-class GreetingServiceTest {
+class GreetingServiceTest: Common() {
 
     @Autowired
     private lateinit var greetingService: GreetingService
@@ -60,5 +60,3 @@ class GreetingServiceTest {
 
     }
 }
-
-fun <T: Any> safeEq(value: T): T = Mockito.eq(value) ?: value
