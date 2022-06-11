@@ -32,4 +32,14 @@ class SimpleMessageServiceTest {
         assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
         assertEquals("Happy birthday, dear first!\n", greetings[0].content)
     }
+
+    @Test
+    fun `simple message for elder male`() {
+        val greetings = simpleMessageService.greetingBirthday(listOf(ClientDTO("mail", "first",
+            "last", "male", "1973/4/7")))
+
+        assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
+        assertEquals("Happy birthday, dear first!\n", greetings[0].content)
+        assert(greetings[0].filePath != null)
+    }
 }
