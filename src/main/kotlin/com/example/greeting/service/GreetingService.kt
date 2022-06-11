@@ -14,14 +14,14 @@ class GreetingService {
     @Autowired
     private lateinit var clientRepository: ClientRepository
     @Autowired
-    private lateinit var simpleMessageService: SimpleMessageService
+    private lateinit var messageServiceFactory: MessageServiceFactory
 
-    fun greetingBirthday(): List<GreetingDTO> {
+    fun greetingBirthday(type: String): List<GreetingDTO> {
 
         val sdf = SimpleDateFormat("M/d")
-        return simpleMessageService.greetingBirthday(clientRepository.findByBirthdayEndsWith(
-            sdf.format(Timestamp(System.currentTimeMillis()))
-        ).map { ClientDTO(it.mail, it.firstName, it.lastName, it.gender, it.birthday) })
+        return messageServiceFactory.getMessageService(type).greetingBirthday(clientRepository
+            .findByBirthdayEndsWith(sdf.format(Timestamp(System.currentTimeMillis())))
+            .map { ClientDTO(it.mail, it.firstName, it.lastName, it.gender, it.birthday) })
 
     }
 }
