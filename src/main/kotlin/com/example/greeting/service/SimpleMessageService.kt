@@ -11,7 +11,7 @@ import java.util.Calendar
 class SimpleMessageService: MessageService {
 
     private val subject = "Subject: Happy birthday!\n"
-    private val content = "Happy birthday, dear %s!\n"
+    private val content = "Happy birthday, dear %s, %s!\n"
     private val elderAge = 49
     private val elderFilePath = "<file_path>"
 
@@ -23,8 +23,8 @@ class SimpleMessageService: MessageService {
             currentCal.get(Calendar.YEAR).minus(birthdayCal.get(Calendar.YEAR)) >= 49
         }
 
-        val greetings = elder.map { GreetingDTO(subject, content.format(it.firstName), elderFilePath) }.toMutableList()
-        greetings.addAll(youth.map { GreetingDTO(subject, content.format(it.firstName)) })
+        val greetings = elder.map { GreetingDTO(subject, content.format(it.firstName, it.lastName), elderFilePath) }.toMutableList()
+        greetings.addAll(youth.map { GreetingDTO(subject, content.format(it.firstName, it.lastName)) })
         return greetings
     }
 }

@@ -28,69 +28,69 @@ class GreetingServiceTest: Common() {
     private lateinit var clientRepository: ClientRepository
 
     @Test
-    fun `simple message for male`() {
+    fun `simple message with full name for male`() {
         `when`(clientRepository.findByBirthdayEndsWith(anyString()))
             .thenReturn(listOf(Client("mail", "first", "last", "male", "1988/4/7")))
         `when`(messageServiceFactory.getMessageService(safeEq(GreetingTypEnum.SIMPLE.type)))
             .thenReturn(simpleMessageService)
         `when`(simpleMessageService.greetingBirthday(anyList<ClientDTO>()))
             .thenReturn(listOf(GreetingDTO("Subject: Happy birthday!\n",
-                "Happy birthday, dear first!\n")))
+                "Happy birthday, dear first, last!\n")))
 
         val greetings = greetingService.greetingBirthday(GreetingTypEnum.SIMPLE.type)
 
         assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
-        assertEquals("Happy birthday, dear first!\n", greetings[0].content)
+        assertEquals("Happy birthday, dear first, last!\n", greetings[0].content)
     }
 
     @Test
-    fun `simple message for female`() {
+    fun `simple message with full name  for female`() {
         `when`(clientRepository.findByBirthdayEndsWith(anyString()))
             .thenReturn(listOf(Client("mail", "first", "last", "male", "1988/4/7")))
         `when`(messageServiceFactory.getMessageService(safeEq(GreetingTypEnum.SIMPLE.type)))
             .thenReturn(simpleMessageService)
         `when`(simpleMessageService.greetingBirthday(anyList<ClientDTO>()))
             .thenReturn(listOf(GreetingDTO("Subject: Happy birthday!\n",
-                "Happy birthday, dear first!\n")))
+                "Happy birthday, dear first, last!\n")))
 
         val greetings = greetingService.greetingBirthday(GreetingTypEnum.SIMPLE.type)
 
         assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
-        assertEquals("Happy birthday, dear first!\n", greetings[0].content)
+        assertEquals("Happy birthday, dear first, last!\n", greetings[0].content)
 
     }
 
     @Test
-    fun `simple message for elder male`() {
+    fun `simple message with full name  for elder male`() {
         `when`(clientRepository.findByBirthdayEndsWith(anyString()))
             .thenReturn(listOf(Client("mail", "first", "last", "male", "1973/4/7")))
         `when`(messageServiceFactory.getMessageService(safeEq(GreetingTypEnum.SIMPLE.type)))
             .thenReturn(simpleMessageService)
         `when`(simpleMessageService.greetingBirthday(anyList<ClientDTO>()))
             .thenReturn(listOf(GreetingDTO("Subject: Happy birthday!\n",
-                "Happy birthday, dear first!\n", "filePath")))
+                "Happy birthday, dear first, last!\n", "filePath")))
 
         val greetings = greetingService.greetingBirthday(GreetingTypEnum.SIMPLE.type)
 
         assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
-        assertEquals("Happy birthday, dear first!\n", greetings[0].content)
+        assertEquals("Happy birthday, dear first, last!\n", greetings[0].content)
         assert(greetings[0].filePath != null)
     }
 
     @Test
-    fun `simple message for elder female`() {
+    fun `simple message with full name  for elder female`() {
         `when`(clientRepository.findByBirthdayEndsWith(anyString()))
             .thenReturn(listOf(Client("mail", "first", "last", "male", "1972/4/7")))
         `when`(messageServiceFactory.getMessageService(safeEq(GreetingTypEnum.SIMPLE.type)))
             .thenReturn(simpleMessageService)
         `when`(simpleMessageService.greetingBirthday(anyList<ClientDTO>()))
             .thenReturn(listOf(GreetingDTO("Subject: Happy birthday!\n",
-                "Happy birthday, dear first!\n", "filePath")))
+                "Happy birthday, dear first, last!\n", "filePath")))
 
         val greetings = greetingService.greetingBirthday(GreetingTypEnum.SIMPLE.type)
 
         assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
-        assertEquals("Happy birthday, dear first!\n", greetings[0].content)
+        assertEquals("Happy birthday, dear first, last!\n", greetings[0].content)
         assert(greetings[0].filePath != null)
 
     }

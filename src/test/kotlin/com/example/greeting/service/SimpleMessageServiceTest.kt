@@ -16,45 +16,45 @@ class SimpleMessageServiceTest {
     private lateinit var simpleMessageService: SimpleMessageService
 
     @Test
-    fun `simple message for male`() {
+    fun `simple message with full name for male`() {
         val greetings = simpleMessageService.greetingBirthday(listOf(ClientDTO("mail", "first",
             "last", "male", "1988/4/7")))
 
         assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
-        assertEquals("Happy birthday, dear first!\n", greetings[0].content)
+        assertEquals("Happy birthday, dear first, last!\n", greetings[0].content)
     }
 
     @Test
-    fun `simple message for female`() {
+    fun `simple message with full name for female`() {
         val greetings = simpleMessageService.greetingBirthday(listOf(ClientDTO("mail", "first",
             "last", "female", "1988/4/7")))
 
         assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
-        assertEquals("Happy birthday, dear first!\n", greetings[0].content)
+        assertEquals("Happy birthday, dear first, last!\n", greetings[0].content)
     }
 
     @Test
-    fun `simple message for elder male`() {
+    fun `simple message with full name for elder male`() {
         val greetings = simpleMessageService.greetingBirthday(listOf(ClientDTO("mail", "first",
             "last", "male", "1973/4/7")))
 
         assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
-        assertEquals("Happy birthday, dear first!\n", greetings[0].content)
+        assertEquals("Happy birthday, dear first, last!\n", greetings[0].content)
         assert(greetings[0].filePath != null)
     }
 
     @Test
-    fun `simple message for elder female`() {
+    fun `simple message with full name for elder female`() {
         val greetings = simpleMessageService.greetingBirthday(listOf(ClientDTO("mail", "first",
             "last", "female", "1973/4/7")))
 
         assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
-        assertEquals("Happy birthday, dear first!\n", greetings[0].content)
+        assertEquals("Happy birthday, dear first, last!\n", greetings[0].content)
         assert(greetings[0].filePath != null)
     }
 
     @Test
-    fun `simple message for elder and youth male`() {
+    fun `simple message with full name for elder and youth male`() {
         val greetings = simpleMessageService.greetingBirthday(listOf(
             ClientDTO("mail", "first", "last", "male", "1973/4/7"),
             ClientDTO("mail2", "first2", "last2", "male", "1972/4/7"),
@@ -62,7 +62,9 @@ class SimpleMessageServiceTest {
         ))
 
         assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
-        assertEquals("Happy birthday, dear first!\n", greetings[0].content)
+        assert(greetings.map { it.content }.contains("Happy birthday, dear first, last!\n"))
+        assert(greetings.map { it.content }.contains("Happy birthday, dear first2, last2!\n"))
+        assert(greetings.map { it.content }.contains("Happy birthday, dear first3, last3!\n"))
         assert(greetings.filter { it.filePath != null }.size == 2)
         assert(greetings.filter { it.filePath == null }.size == 1)
     }
@@ -76,7 +78,9 @@ class SimpleMessageServiceTest {
         ))
 
         assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
-        assertEquals("Happy birthday, dear first!\n", greetings[0].content)
+        assert(greetings.map { it.content }.contains("Happy birthday, dear first, last!\n"))
+        assert(greetings.map { it.content }.contains("Happy birthday, dear first2, last2!\n"))
+        assert(greetings.map { it.content }.contains("Happy birthday, dear first3, last3!\n"))
         assert(greetings.filter { it.filePath != null }.size == 2)
         assert(greetings.filter { it.filePath == null }.size == 1)
     }
