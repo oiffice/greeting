@@ -39,8 +39,8 @@ class GreetingServiceTest: Common() {
 
         val greetings = greetingService.greetingBirthday(GreetingTypEnum.SIMPLE.type)
 
-        assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
-        assertEquals("Happy birthday, dear first, last!\n", greetings[0].content)
+        assertEquals("Subject: Happy birthday!\n", greetings.greetingDTOs[0].subject)
+        assertEquals("Happy birthday, dear first, last!\n", greetings.greetingDTOs[0].content)
     }
 
     @Test
@@ -55,8 +55,8 @@ class GreetingServiceTest: Common() {
 
         val greetings = greetingService.greetingBirthday(GreetingTypEnum.SIMPLE.type)
 
-        assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
-        assertEquals("Happy birthday, dear first, last!\n", greetings[0].content)
+        assertEquals("Subject: Happy birthday!\n", greetings.greetingDTOs[0].subject)
+        assertEquals("Happy birthday, dear first, last!\n", greetings.greetingDTOs[0].content)
 
     }
 
@@ -72,9 +72,9 @@ class GreetingServiceTest: Common() {
 
         val greetings = greetingService.greetingBirthday(GreetingTypEnum.SIMPLE.type)
 
-        assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
-        assertEquals("Happy birthday, dear first, last!\n", greetings[0].content)
-        assert(greetings[0].filePath != null)
+        assertEquals("Subject: Happy birthday!\n", greetings.greetingDTOs[0].subject)
+        assertEquals("Happy birthday, dear first, last!\n", greetings.greetingDTOs[0].content)
+        assert(greetings.greetingDTOs[0].filePath != null)
     }
 
     @Test
@@ -89,9 +89,9 @@ class GreetingServiceTest: Common() {
 
         val greetings = greetingService.greetingBirthday(GreetingTypEnum.SIMPLE.type)
 
-        assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
-        assertEquals("Happy birthday, dear first, last!\n", greetings[0].content)
-        assert(greetings[0].filePath != null)
+        assertEquals("Subject: Happy birthday!\n", greetings.greetingDTOs[0].subject)
+        assertEquals("Happy birthday, dear first, last!\n", greetings.greetingDTOs[0].content)
+        assert(greetings.greetingDTOs[0].filePath != null)
 
     }
 
@@ -109,9 +109,9 @@ class GreetingServiceTest: Common() {
 
         val greetings = greetingService.greetingBirthday(GreetingTypEnum.TAILER.type)
 
-        assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
+        assertEquals("Subject: Happy birthday!\n", greetings.greetingDTOs[0].subject)
         assertEquals("Happy birthday, dear first!\nWe offer special discount 20% off for the following items:\n" +
-                "White Wine, iPhone X\n", greetings[0].content)
+                "White Wine, iPhone X\n", greetings.greetingDTOs[0].content)
     }
 
     @Test
@@ -128,9 +128,9 @@ class GreetingServiceTest: Common() {
 
         val greetings = greetingService.greetingBirthday(GreetingTypEnum.TAILER.type)
 
-        assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
+        assertEquals("Subject: Happy birthday!\n", greetings.greetingDTOs[0].subject)
         assertEquals("Happy birthday, dear first!\nWe offer special discount 50% off for the following items:\n" +
-                "Cosmetic, LV Handbags\n", greetings[0].content)
+                "Cosmetic, LV Handbags\n", greetings.greetingDTOs[0].content)
 
     }
 }
