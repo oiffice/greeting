@@ -1,4 +1,4 @@
-package com.example.greeting
+package com.example.greeting.service
 
 import com.example.greeting.dto.ClientDTO
 import com.example.greeting.dto.GreetingDTO

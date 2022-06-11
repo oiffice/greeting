@@ -1,6 +1,7 @@
-package com.example.greeting
+package com.example.greeting.service
 
 import com.example.greeting.dto.ClientDTO
+import com.example.greeting.service.SimpleMessageService
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
