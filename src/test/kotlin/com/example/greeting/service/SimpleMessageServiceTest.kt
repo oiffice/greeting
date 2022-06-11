@@ -21,7 +21,7 @@ class SimpleMessageServiceTest {
             "last", "male", "1988/4/7")))
 
         assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
-        assertEquals("Happy birthday, dear Robert!\n", greetings[0].content)
+        assertEquals("Happy birthday, dear first!\n", greetings[0].content)
     }
 
     @Test
@@ -30,6 +30,6 @@ class SimpleMessageServiceTest {
             "last", "female", "1988/4/7")))
 
         assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
-        assertEquals("Happy birthday, dear Robert!\n", greetings[0].content)
+        assertEquals("Happy birthday, dear first!\n", greetings[0].content)
     }
 }
