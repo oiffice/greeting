@@ -25,3 +25,9 @@ whose birthday is today<br/>
 curl -X GET "http://localhost:8080/api/greeting/birthday?type=simple"
 
 
+### version6 - Simple Message but different output data format
+---
+Send simple greeting birthday message with different format <br/>
+curl -X GET "http://localhost:8080/api/greeting/birthday?type=simple"
+
+
