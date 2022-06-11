@@ -59,4 +59,43 @@ class GreetingServiceTest: Common() {
         assertEquals("Happy birthday, dear first!\n", greetings[0].content)
 
     }
+
+    @Test
+    fun `tailer message for male`() {
+        `when`(clientRepository.findByBirthdayEndsWith(anyString()))
+            .thenReturn(listOf(Client("mail", "first", "last", "male", "1988/4/7")))
+        `when`(messageServiceFactory.getMessageService(safeEq(GreetingTypEnum.TAILER.type)))
+            .thenReturn(simpleMessageService)
+        `when`(simpleMessageService.greetingBirthday(anyList<ClientDTO>()))
+            .thenReturn(listOf(GreetingDTO("Subject: Happy birthday!\n",
+                "Happy birthday, dear first!\n" +
+                        "We offer special discount 20% off for the following items:\n" +
+                        "White Wine, iPhone X\n")))
+
+        val greetings = greetingService.greetingBirthday(GreetingTypEnum.TAILER.type)
+
+        assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
+        assertEquals("Happy birthday, dear first!\nWe offer special discount 20% off for the following items:\n" +
+                "White Wine, iPhone X\n", greetings[0].content)
+    }
+
+    @Test
+    fun `tailer message for female`() {
+        `when`(clientRepository.findByBirthdayEndsWith(anyString()))
+            .thenReturn(listOf(Client("mail", "first", "last", "male", "1988/4/7")))
+        `when`(messageServiceFactory.getMessageService(safeEq(GreetingTypEnum.TAILER.type)))
+            .thenReturn(simpleMessageService)
+        `when`(simpleMessageService.greetingBirthday(anyList<ClientDTO>()))
+            .thenReturn(listOf(GreetingDTO("Subject: Happy birthday!\n",
+                "Happy birthday, dear first!\n" +
+                        "We offer special discount 50% off for the following items:\n" +
+                        "Cosmetic, LV Handbags\n")))
+
+        val greetings = greetingService.greetingBirthday(GreetingTypEnum.TAILER.type)
+
+        assertEquals("Subject: Happy birthday!\n", greetings[0].subject)
+        assertEquals("Happy birthday, dear first!\nWe offer special discount 50% off for the following items:\n" +
+                "Cosmetic, LV Handbags\n", greetings[0].content)
+
+    }
 }

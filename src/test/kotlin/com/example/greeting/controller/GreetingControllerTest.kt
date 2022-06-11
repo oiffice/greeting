@@ -39,4 +39,19 @@ class GreetingControllerTest {
             .andExpect(jsonPath("$.[0].subject").isNotEmpty)
             .andExpect(jsonPath("$.[0].content").isNotEmpty)
     }
+    @Test
+    fun `tailer message`() {
+        `when`(greetingService.greetingBirthday(GreetingTypEnum.TAILER.type))
+            .thenReturn(listOf(GreetingDTO("subject", "content\nWe offer")))
+        val result = mockMvc.perform(get("/api/greeting/birthday")
+            .param("type", GreetingTypEnum.TAILER.type)
+        )
+            .andExpect(status().isOk)
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[0].subject").isNotEmpty)
+            .andExpect(jsonPath("$.[0].content").isNotEmpty)
+            .andReturn()
+
+        assert(result.response.contentAsString.contains("We offer"))
+    }
 }
